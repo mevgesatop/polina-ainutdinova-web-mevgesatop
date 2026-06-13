@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Полина Айнутдинова | Актриса и Модель</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #08080a;
+            --text-primary: #f5f5f7;
+            --text-secondary: #a1a1aa;
+            --accent-gold: #d4af37;
+            --accent-glow: rgba(212, 175, 55, 0.25);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --vk-blue: #4a76a8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .bg-gradient {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.1), transparent 30%),
+                        radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.08), transparent 30%);
+            animation: pulseBg 12s ease-in-out infinite alternate;
+        }
+
+        .bg-gradient::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+            animation: starsMove 100s linear infinite; opacity: 0.6;
+        }
+
+        @keyframes pulseBg { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
+        @keyframes starsMove { from { background-position: 0 0, 40px 60px, 130px 270px; } to { background-position: 550px 550px, 390px 410px, 680px 820px; } }
+
+        h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 300; }
+
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 1.5rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(8, 8, 10, 0.6); backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border); z-index: 1000; transition: all 0.4s ease;
+        }
+
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; letter-spacing: 3px; color: var(--text-primary); text-decoration: none; text-transform: uppercase; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s ease; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px; background: var(--accent-gold); transition: width 0.3s ease; }
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 5%; position: relative; }
+        .hero-subtitle { font-size: 0.9rem; letter-spacing: 5px; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 1.5rem; opacity: 0; animation: fadeInUp 1.2s ease forwards 0.3s; }
+        .hero-title { font-size: clamp(3.5rem, 10vw, 8rem); line-height: 0.95; margin-bottom: 2rem; background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0; animation: fadeInUp 1.2s ease forwards 0.6s; }
+        .hero-desc { max-width: 600px; color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 3rem; opacity: 0; animation: fadeInUp 1.2s ease forwards 0.9s; }
+        .btn { padding: 1rem 2.5rem; border: 1px solid var(--accent-gold); background: transparent; color: var(--accent-gold); font-family: 'Montserrat', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.4s ease; text-decoration: none; opacity: 0; animation: fadeInUp 1.2s ease forwards 1.2s; }
+        .btn:hover { background: var(--accent-gold); color: var(--bg-color); box-shadow: 0 0 40px var(--accent-glow); }
+
+        section { padding: 8rem 5%; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 3rem; margin-bottom: 4rem; text-align: center; position: relative; display: inline-block; left: 50%; transform: translateX(-50%); }
+        .section-title::after { content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 60px; height: 2px; background: var(--accent-gold); }
+
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+        .about-image { width: 100%; height: 550px; background: linear-gradient(45deg, #1a1a2e, #16213e); border-radius: 8px; position: relative; overflow: hidden; border: 1px solid var(--glass-border); box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: sticky; top: 120px; }
+        .about-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+        .about-image:hover img { transform: scale(1.05); }
+        .about-text h3 { font-size: 2.2rem; margin-bottom: 1.5rem; color: var(--accent-gold); }
+        .about-text p { color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1.05rem; line-height: 1.8; }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--glass-border); }
+        .stat-item h4 { font-size: 2.5rem; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .stat-item p { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin: 0; }
+
+        .info-section { margin-top: 3rem; }
+        .info-section h4 { font-size: 1.5rem; color: var(--accent-gold); margin-bottom: 1rem; letter-spacing: 1px; }
+        .info-section ul { list-style: none; padding-left: 0; }
+        .info-section ul li { color: var(--text-secondary); margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; font-size: 1rem; line-height: 1.6; }
+        .info-section ul li::before { content: '✦'; position: absolute; left: 0; color: var(--accent-gold); }
+
+        .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem; }
+        .skill-item { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 1rem; border-radius: 4px; text-align: center; transition: all 0.3s ease; }
+        .skill-item:hover { border-color: var(--accent-gold); transform: translateY(-2px); }
+        .skill-item span { color: var(--text-primary); font-size: 0.95rem; }
+
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .project-card { position: relative; height: 420px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 8px; overflow: hidden; cursor: pointer; transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); text-decoration: none; display: block; }
+        .project-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; opacity: 0.7; }
+        .project-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 2rem; background: linear-gradient(to top, rgba(8,8,10,0.95) 0%, rgba(8,8,10,0.6) 50%, transparent 100%); transform: translateY(20px); opacity: 0; transition: all 0.4s ease; }
+        .project-card:hover { transform: translateY(-10px); border-color: var(--accent-gold); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .project-card:hover img { transform: scale(1.1); opacity: 1; }
+        .project-card:hover .project-overlay { transform: translateY(0); opacity: 1; }
+        .project-year { font-size: 0.8rem; color: var(--accent-gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .project-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .project-role { font-size: 0.9rem; color: var(--text-secondary); }
+
+        /* Текстовые карточки проектов (без фото) */
+        .project-card-text {
+            position: relative;
+            min-height: 200px;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.6) 0%, rgba(22, 33, 62, 0.4) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 2.5rem 2rem;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            overflow: hidden;
+        }
+
+        .project-card-text::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.05), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .project-card-text:hover::before {
+            left: 100%;
+        }
+
+        .project-card-text:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.8) 0%, rgba(22, 33, 62, 0.6) 100%);
+        }
+
+        .project-card-text .project-year {
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-card-text .project-title {
+            position: relative;
+            z-index: 1;
+            font-size: 1.6rem;
+            transition: color 0.3s ease;
+        }
+
+        .project-card-text:hover .project-title {
+            color: var(--accent-gold);
+        }
+
+        .project-card-text .project-role {
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-link-arrow {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        .project-card-text:hover .project-link-arrow {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            transform: translateX(5px);
+        }
+
+        .vk-section { background: linear-gradient(135deg, rgba(74, 118, 168, 0.1) 0%, rgba(8, 8, 10, 0) 100%); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); }
+        .vk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; margin-top: 3rem; }
+        .vk-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; overflow: hidden; transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); text-decoration: none; display: block; }
+        .vk-card:hover { transform: translateY(-8px); border-color: var(--vk-blue); box-shadow: 0 20px 50px rgba(74, 118, 168, 0.3); }
+        .vk-thumbnail { position: relative; height: 220px; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .vk-thumbnail img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: transform 0.6s ease; }
+        .vk-card:hover .vk-thumbnail img { transform: scale(1.05); }
+        .vk-play-icon { position: absolute; width: 70px; height: 70px; background: var(--vk-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(74, 118, 168, 0.4); }
+        .vk-play-icon::before { content: ''; width: 0; height: 0; border-left: 22px solid white; border-top: 14px solid transparent; border-bottom: 14px solid transparent; margin-left: 6px; }
+        .vk-card:hover .vk-play-icon { transform: scale(1.15); background: var(--accent-gold); }
+        .vk-info { padding: 2rem; }
+        .vk-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--text-primary); margin-bottom: 0.8rem; }
+        .vk-description { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.2rem; }
+        .vk-watch-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.7rem 1.5rem; background: var(--vk-blue); color: white; border-radius: 6px; font-size: 0.85rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; transition: all 0.3s ease; }
+        .vk-card:hover .vk-watch-btn { background: var(--accent-gold); color: var(--bg-color); }
+
+        .quote-section { text-align: center; padding: 10rem 5%; background: var(--glass-bg); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); position: relative; }
+        .quote-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 3rem); font-style: italic; color: var(--text-primary); max-width: 900px; margin: 0 auto; line-height: 1.4; }
+        .quote-author { margin-top: 2.5rem; color: var(--accent-gold); letter-spacing: 3px; text-transform: uppercase; font-size: 0.9rem; }
+
+        footer { padding: 5rem 5%; text-align: center; }
+        .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 2rem; color: var(--text-primary); }
+        .social-links { display: flex; justify-content: center; gap: 2.5rem; margin-bottom: 3rem; flex-wrap: wrap; }
+        .social-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.3s ease; }
+        .social-links a:hover { color: var(--accent-gold); }
+        .copyright { color: var(--text-secondary); font-size: 0.8rem; opacity: 0.5; letter-spacing: 1px; }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        .reveal { opacity: 0; transform: translateY(60px); transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .about-content { grid-template-columns: 1fr; }
+            .about-image { height: 400px; order: -1; position: relative; top: 0; }
+            .stats { grid-template-columns: 1fr; gap: 1.5rem; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .vk-grid { grid-template-columns: 1fr; }
+            section { padding: 5rem 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-gradient"></div>
+
+    <nav>
+        <a href="#" class="logo">П. Айнутдинова</a>
+        <ul class="nav-links">
+            <li><a href="#about">Биография</a></li>
+            <li><a href="#projects">Проекты</a></li>
+            <li><a href="#vk-videos">VK Видео</a></li>
+            <li><a href="#philosophy">Вдохновение</a></li>
+            <li><a href="#contact">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <p class="hero-subtitle">Восходящая звезда российского кино</p>
+        <h1 class="hero-title">Полина<br>Айнутдинова</h1>
+        <p class="hero-desc">Актриса. Модель. Вдохновение. Более 30 ролей, покоривших сердца зрителей своей искренностью и талантом.</p>
+        <a href="#vk-videos" class="btn">Смотреть видео</a>
+    </header>
+
+    <section id="about">
+        <h2 class="section-title reveal">Биография</h2>
+        <div class="about-content">
+            <div class="about-image reveal">
+                <img src="https://avatars.mds.yandex.net/get-entity_search/5735732/1194959259/S600xU_2x" alt="Полина Айнутдинова">
+            </div>
+            <div class="about-text reveal">
+                <h3>Путь к мечте начался в 4 года</h3>
+                <p>Полина Айнутдинова родилась <strong>16 октября 2013 года</strong> в городе Пермь. С самого детства она проявляла необычайную тягу к творчеству и искусству. Её творческий путь начался невероятно рано: уже в <strong>4 года</strong> она дебютировала в популярном телешоу «Лучше всех», где впервые продемонстрировала свой природный артистизм, обаяние и невероятную для своего возраста харизму.</p>
+                
+                <p>Несмотря на юный возраст, Полина обладает завидной профессиональной зрелостью. За её плечами уже более <strong>30 ролей</strong> в кино и на телевидении, включая главные роли в таких знаковых проектах, как «Папины дочки. Новые» и «Любопытная Варвара». Её талант органично сочетает в себе детскую непосредственность и глубокое понимание драматургии.</p>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <h4>30+</h4>
+                        <p>Ролей в кино</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>9</h4>
+                        <p>Лет в профессии</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>∞</h4>
+                        <p>Любовь к профессии</p>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h4>🎭 Образование и развитие</h4>
+                    <ul>
+                        <li>Посещает актёрские курсы и мастер-классы у ведущих педагогов</li>
+                        <li>Изучает сценическую речь и движение</li>
+                        <li>Развивает вокальные данные и хореографические навыки</li>
+                        <li>Принимает участие в театральных постановках</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h4> Навыки и таланты</h4>
+                    <div class="skills-grid">
+                        <div class="skill-item"><span>🎬 Актёрское мастерство</span></div>
+                        <div class="skill-item"><span> Сценическая речь</span></div>
+                        <div class="skill-item"><span>💃 Хореография</span></div>
+                        <div class="skill-item"><span>🎵 Вокал</span></div>
+                        <div class="skill-item"><span>📸 Фотомодель</span></div>
+                        <div class="skill-item"><span>🎭 Импровизация</span></div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h4>💫 Интересные факты</h4>
+                    <ul>
+                        <li>Начала сниматься в возрасте 4 лет</li>
+                        <li>Успешно совмещает учёбу и съёмки</li>
+                        <li>Обожает читать книги и изучать новые языки</li>
+                        <li>Мечтает сыграть в большом кино и работать с известными режиссёрами</li>
+                        <li>Ведёт активный образ жизни, занимается спортом</li>
+                        <li>Любит путешествовать и открывать для себя новые культуры</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h4>🏆 Достижения</h4>
+                    <ul>
+                        <li>Участница популярного телешоу «Лучше всех»</li>
+                        <li>Исполнила главные роли в нескольких успешных сериалах</li>
+                        <li>Признана одной из самых перспективных юных актрис России</li>
+                        <li>Активно развивается как модель и блогер</li>
+                        <li>Покорила сердца миллионов зрителей своей искренностью</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title reveal">Избранные проекты</h2>
+        <div class="projects-grid">
+            <div class="project-card reveal">
+                <img src="https://avatars.mds.yandex.net/get-ott/2385704/2a000001993f2c08ff03ad7d62457c6cb2fb/600x900" alt="Папины дочки">
+                <div class="project-overlay">
+                    <div class="project-year">Сериал</div>
+                    <h3 class="project-title">Папины дочки. Новые</h3>
+                    <p class="project-role">⭐ Главная роль</p>
+                </div>
+            </div>
+
+            <div class="project-card reveal">
+                <img src="https://images.iptv.rt.ru/images/cpql7p3ir4sqiatbc3v0.jpg" alt="Любопытная Варвара">
+                <div class="project-overlay">
+                    <div class="project-year">Сериал</div>
+                    <h3 class="project-title">Любопытная Варвара</h3>
+                    <p class="project-role">⭐ Главная роль</p>
+                </div>
+            </div>
+
+            <div class="project-card reveal">
+                <img src="https://images-s.kinorium.com/movie/cast/12070669/w150_5484256.jpg?1776632742" alt="Красавица Зойка">
+                <div class="project-overlay">
+                    <div class="project-year">2026</div>
+                    <h3 class="project-title">Красавица Зойка</h3>
+                    <p class="project-role">⭐ Главная роль</p>
+                </div>
+            </div>
+
+            <a href="https://www.kinopoisk.ru/search/?query=Патриот+сериал+2020" target="_blank" class="project-card-text reveal">
+                <div class="project-link-arrow">→</div>
+                <div class="project-year">2020 • Сериал</div>
+                <h3 class="project-title">Патриот</h3>
+                <p class="project-role">🎭 Актёрский состав</p>
+            </a>
+
+            <a href="https://www.kinopoisk.ru/search/?query=Поймай+собаку+если+сможешь+2024" target="_blank" class="project-card-text reveal">
+                <div class="project-link-arrow">→</div>
+                <div class="project-year">2024 • Фильм</div>
+                <h3 class="project-title">Поймай собаку, если сможешь</h3>
+                <p class="project-role">🎭 Актёрский состав</p>
+            </a>
+
+            <a href="https://www.kinopoisk.ru/search/?query=Поле+чудес+2025+сериал" target="_blank" class="project-card-text reveal">
+                <div class="project-link-arrow">→</div>
+                <div class="project-year">2025 • Сериал</div>
+                <h3 class="project-title">Поле чудес</h3>
+                <p class="project-role">🎭 Актёрский состав</p>
+            </a>
+        </div>
+    </section>
+
+    <section id="vk-videos" class="vk-section">
+        <h2 class="section-title reveal">Смотреть на VK Видео</h2>
+        <p style="text-align: center; color: var(--text-secondary); font-size: 1.1rem; max-width: 700px; margin: -2rem auto 3rem;">
+            Смотрите любимые проекты с участием Полины Айнутдиновой прямо сейчас
+        </p>
+        <div class="vk-grid">
+            <a href="https://vkvideo.ru/video-18496184_456264229" target="_blank" class="vk-card reveal">
+                <div class="vk-thumbnail">
+                    <img src="https://avatars.mds.yandex.net/get-ott/2385704/2a000001993f2c08ff03ad7d62457c6cb2fb/600x900" alt="Папины дочки">
+                    <div class="vk-play-icon"></div>
+                </div>
+                <div class="vk-info">
+                    <h3 class="vk-title">Папины дочки. Новые</h3>
+                    <p class="vk-description">Главная роль в продолжении легендарного семейного ситкома. Полина воплощает на экране яркий и запоминающийся образ.</p>
+                    <span class="vk-watch-btn">▶ Смотреть видео</span>
+                </div>
+            </a>
+
+            <a href="https://vk.com/video-52087668_456252142?ysclid=mqb1cc6gxq752918220" target="_blank" class="vk-card reveal">
+                <div class="vk-thumbnail">
+                    <img src="https://images.iptv.rt.ru/images/cpql7p3ir4sqiatbc3v0.jpg" alt="Любопытная Варвара">
+                    <div class="vk-play-icon"></div>
+                </div>
+                <div class="vk-info">
+                    <h3 class="vk-title">Любопытная Варвара</h3>
+                    <p class="vk-description">Главная роль в увлекательном сериале о любознательной девочке, которая постоянно попадает в забавные ситуации.</p>
+                    <span class="vk-watch-btn">▶ Смотреть видео</span>
+                </div>
+            </a>
+
+            <a href="https://vk.com/video-104714561_456239568" target="_blank" class="vk-card reveal">
+                <div class="vk-thumbnail">
+                    <img src="https://images-s.kinorium.com/movie/cast/12070669/w150_5484256.jpg?1776632742" alt="Красавица Зойка">
+                    <div class="vk-play-icon"></div>
+                </div>
+                <div class="vk-info">
+                    <h3 class="vk-title">Красавица Зойка</h3>
+                    <p class="vk-description">Новый проект 2026 года. Полина в главной роли в трогательной истории о дружбе и мечтах.</p>
+                    <span class="vk-watch-btn">▶ Смотреть видео</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section id="philosophy" class="quote-section reveal">
+        <p class="quote-text">«Кино — это магия, которая позволяет прожить тысячу жизней, оставаясь при этом верной своему сердцу и своей мечте. Каждая роль — это новый мир, который я открываю для себя и для зрителей.»</p>
+        <p class="quote-author">— Полина Айнутдинова</p>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-logo">Полина Айнутдинова</div>
+        <div class="social-links">
+            <a href="https://www.kinopoisk.ru/search/?query=Полина+Айнутдинова" target="_blank">Кинопоиск</a>
+            <a href="tel:+79036269599">📞 Кастинг: +7 903 626-95-99</a>
+        </div>
+        <p class="copyright">© 2026 Полина Айнутдинова. Официальный сайт. Все права защищены.</p>
+    </footer>
+
+    <script>
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 100;
+            
+            revealElements.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(8, 8, 10, 0.95)';
+                nav.style.padding = '1rem 5%';
+            } else {
+                nav.style.background = 'rgba(8, 8, 10, 0.6)';
+                nav.style.padding = '1.5rem 5%';
+            }
+        });
+    </script>
+</body>
+</html>
